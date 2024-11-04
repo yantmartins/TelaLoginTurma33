@@ -49,17 +49,45 @@
                             ?>
                                 <!-- bloco de HTML -->
                                 <div class="msg-sucesso">
-                                    <p>Cadastrado com Sucesso</p>
+                                    <p>Cadastrado com Sucesso.</p>
                                     <p>Clique <a href="login.php">aqui </a>para logar</p>
                                 </div>
                             <?php
                         }
-                    };
+                        else
+                        {
+                            ?>
+                            <div class="msg-erro">
+                                <p>E-mail já cadastrado.</p>
+                            </div>
+                            <?php
+                        }
+                    }
+                    else
+                    {
+                        ?>
+                            <div class="msg-erro">
+                                <p>As Senhas não conferem.</p>
+                            </div>
+                        <?php
+                    }
                 }
                 else
                 {
-                    echo "Tente outra vez :(".$usuario->msgErro;
+                    ?> 
+                    <div class="msg-erro">
+                        <?php echo "Erro: ".$usuario->msgErro;?>                        
+                    </div>
+                    <?php
                 }
+            }
+            else
+            {
+                ?>
+                    <div class="msg-erro">
+                        <p>Preencha todos os campos.</p>
+                    </div>
+                <?php
             }
         }
     ?>
