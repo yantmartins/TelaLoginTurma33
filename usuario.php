@@ -74,7 +74,7 @@
 
             $sqlListar = $pdo->prepare("SELECT * FROM usuario");
             $sqlListar->execute();
-            
+
             if($sqlListar->rowCount()>0)
             {
                 $dados = $sqlListar->fetchAll(PDO::FETCH_ASSOC);
@@ -84,6 +84,40 @@
             {
                 return false;
             }
+        }
+
+        public function editarUsuarios($nome,$telefone,$email,$senha)
+        {
+            global $pdo;
+
+            $sql = $pdo->prepare("SELECT id_usuario FROM usuario WHERE email = :e");
+            $sql->bindValue(":e",$email);
+            $sql->execute();
+
+            if($checkEmail->rowCount() > 0)
+            {
+                return false;    
+            }
+            else
+            {
+                $sql = $pdo->prepare("UPDATE usuario SET (nome,telefone,email,senha) VALUES (:n, :t, :e, :s)");
+                $sql->bindValue(":n",$nome);
+                $sql->bindValue(":t",$telefone);
+                $sql->bindValue(":e",$email);
+                $sql->bindValue(":s",md5($senha));
+                $sql->execute();
+                return true;
+            }
+        }
+
+        public function excluirUsuario($email)
+        {
+            global $pdo;
+            $sql = $pdo->prepare("DELETE FROM usuario WHERE email = :e");
+            $sql->bindValue(":e",$email);
+            $sql->execute();
+
+            return true;
         }
     }
 ?>
