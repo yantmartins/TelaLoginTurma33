@@ -16,11 +16,6 @@
     font-weight: bold;
 }
 
-.tabela tr:nth-child(even) {
-    background-color: #f9f9f9;
-}
-
-
 .tabela .btn {
     padding: 6px 12px;
     border: none;
@@ -40,9 +35,4 @@
 .tabela .btn.excluir {
     background-color: #f44336;
     color: white;
-}
-
-
-.tabela .btn:hover {
-    opacity: 0.8;
 }
