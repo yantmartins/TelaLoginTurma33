@@ -34,8 +34,8 @@
                     <td><?php echo $pessoa['email'];?></td>
                     <td><?php echo $pessoa['telefone'];?></td>
                 <td>
-                    <button class="btn alterar">Editar</button>
-                    <button class="btn excluir">Excluir</button>
+                    <a href="editarUsuario.php?id=" class="btn editar">Editar</a>
+                    <a href="excluirUsuario.php?id=" class="btn excluir">Excluir</a>
                 </td>
                 </tr>
             
