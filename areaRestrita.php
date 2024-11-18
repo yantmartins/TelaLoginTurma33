@@ -11,10 +11,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Listar Dados</title>
-    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>LISTAR USUÁRIOS</h1>
+    <h1>LISTAR USUÁRIO</h1>
     <table border="1" class="tabela">
         <thead>
             <tr>
@@ -33,10 +32,10 @@
                     <td><?php echo $pessoa['nome'];?></td>
                     <td><?php echo $pessoa['email'];?></td>
                     <td><?php echo $pessoa['telefone'];?></td>
-                <td>
-                    <a href="editarUsuario.php?id=" class="btn editar">Editar</a>
-                    <a href="excluirUsuario.php?id=" class="btn excluir">Excluir</a>
-                </td>
+                    <td>
+                        <a href="editarUsuario.php?id=<?php $pessoa['id_usuario']; ?>">Editar</a>
+                        <a href="excluirUsuario.php?id=<?php $pessoa['id_usuario']; ?>">Excluir</a>
+                    </td>
                 </tr>
             
             <?php
@@ -51,3 +50,4 @@
     </table>
 </body>
 </html>
+

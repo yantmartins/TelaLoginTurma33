@@ -9,14 +9,16 @@
         {
             global $pdo;
 
-            try
-            {
-                $pdo = new PDO("mysql:dbname=".$nome, $usuario, $senha);
+            try {
+                $this->pdo = new PDO("mysql:dbname=" . $nome, $usuario, $senha);
+            } catch (PDOException $erro) {
+                $this->msgErro = $erro->getMessage();
             }
-            catch(PDOException $erro)
-            {
-                $msgErro = $erro->getMessage();
-            }
+        }
+    
+        public function getPdo()
+        {
+            return $this->pdo;
         }
         public function cadastrar($nome, $telefone, $email, $senha)
         {
@@ -86,38 +88,5 @@
             }
         }
 
-        public function editarUsuarios($nome,$telefone,$email,$senha)
-        {
-            global $pdo;
-
-            $sql = $pdo->prepare("SELECT id_usuario FROM usuario WHERE email = :e");
-            $sql->bindValue(":e",$email);
-            $sql->execute();
-
-            if($checkEmail->rowCount() > 0)
-            {
-                return false;    
-            }
-            else
-            {
-                $sql = $pdo->prepare("UPDATE usuario SET (nome,telefone,email,senha) VALUES (:n, :t, :e, :s)");
-                $sql->bindValue(":n",$nome);
-                $sql->bindValue(":t",$telefone);
-                $sql->bindValue(":e",$email);
-                $sql->bindValue(":s",md5($senha));
-                $sql->execute();
-                return true;
-            }
-        }
-
-        public function excluirUsuario($email)
-        {
-            global $pdo;
-            $sql = $pdo->prepare("DELETE FROM usuario WHERE email = :e");
-            $sql->bindValue(":e",$email);
-            $sql->execute();
-
-            return true;
-        }
     }
-?>
+    
