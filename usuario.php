@@ -21,10 +21,10 @@
         }
         public function cadastrar($nome, $telefone, $email, $senha)
         {
-            global $pdo;
+            
 
             //verificar se o email já está cadastrado no banco de dados
-            $sql = $pdo->prepare("SELECT id_usuario FROM usuario WHERE email = :maria"); //:maria significa que colocamos um apelido na variavel email do PHP
+            $sql = $this->pdo->prepare("SELECT id_usuario FROM usuario WHERE email = :maria"); //:maria significa que colocamos um apelido na variavel email do PHP
             $sql->bindValue(":maria",$email);
             $sql->execute();
 
@@ -36,7 +36,7 @@
             else
             {
                 //cadastrar usuario
-                $sql = $pdo->prepare("INSERT INTO usuario (nome,telefone,email,senha) VALUES (:n, :t, :e, :s)");
+                $sql = $this->pdo->prepare("INSERT INTO usuario (nome,telefone,email,senha) VALUES (:n, :t, :e, :s)");
                 $sql->bindValue(":n",$nome);
                 $sql->bindValue(":t",$telefone);
                 $sql->bindValue(":e",$email);
@@ -48,9 +48,8 @@
 
         public function logar($email,$senha)
         {
-            global $pdo;
 
-            $verificarEmail = $pdo->prepare("SELECT id_usuario FROM usuario WHERE email = :e AND senha = :s"); // prepapre - preparar os usuarios para nao ficar exposto no sql
+            $verificarEmail = $this->pdo->prepare("SELECT id_usuario FROM usuario WHERE email = :e AND senha = :s"); // prepapre - preparar os usuarios para nao ficar exposto no sql
             $verificarEmail->bindValue(":e",$email);
             $verificarEmail->bindValue(":s", md5($senha));
             $verificarEmail->execute();
