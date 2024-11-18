@@ -9,7 +9,8 @@ $usuario->conectar("cadastrousuarioturma33", "localhost", "root", "");
 if (isset($_GET['id']) && !empty($_GET['id'])) {
     $id = addslashes($_GET['id']);
 
-    $sql = $usuario->pdo->prepare("SELECT * FROM usuario WHERE id_usuario = :id");
+    $pdo = $usuario->getPdo();
+    $sql = $pdo->prepare("SELECT * FROM usuario WHERE id_usuario = :id");
     $sql->bindValue(":id", $id);
     $sql->execute();
 
@@ -24,29 +25,28 @@ if (isset($_GET['id']) && !empty($_GET['id'])) {
     exit;
 }
 
-if (isset($_POST['nome'])) 
-{    
+$pdo = $usuario->getPdo();
+if (isset($_POST['nome'])) {
     $nome = $_POST['nome'];
     $email = $_POST['email'];
     $telefone = $_POST['telefone'];
-    
 
-    if (!empty($nome) && !empty($email) && !empty($telefone)) 
-    {
-        $sql = $usuario->pdo->prepare("UPDATE usuario SET nome = :n, email = :e, telefone = :t WHERE id_usuario = :id");
+    if (!empty($nome) && !empty($email) && !empty($telefone)) {
+        $sql = $pdo->prepare("UPDATE usuario SET nome = :n, email = :e, telefone = :t WHERE id_usuario = :id");
         $sql->bindValue(":n", $nome);
         $sql->bindValue(":e", $email);
         $sql->bindValue(":t", $telefone);
         $sql->bindValue(":id", $id);
-        $sql->execute();
-        
-        echo "Usuário editado com sucesso.";
-    } 
-    else 
-    {
-        echo "Erro ao editar usuário.";
+        if ($sql->execute()) {
+            echo "<p>Usuário editado com sucesso! <a href='areaRestrita.php'>Voltar</a></p>";
+        } else {
+            echo "<p>Erro ao editar o usuário.</p>";
+        }
+    } else {
+        echo "<p>Preencha todos os campos!</p>";
     }
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -59,19 +59,16 @@ if (isset($_POST['nome']))
     <h1>Editar Usuário</h1>
     <form method="POST">
         <label>Nome:</label>
-        <input type="text" name="nome" value="" required><br>
+        <input type="text" name="nome" value="<?php echo $dadosUsuario['nome']; ?>" required><br>
 
         <label>Telefone:</label>
-        <input type="text" name="telefone" value="" required><br>
+        <input type="text" name="telefone" value="<?php echo $dadosUsuario['telefone']; ?>" required><br>
 
         <label>Email:</label>
-        <input type="email" name="email" value="" required><br>
+        <input type="email" name="email" value="<?php echo $dadosUsuario['email']; ?>" required><br>
 
-        <label>Senha:</label>
-        <input type="password" name="senha" required><br>
-
-    <button type="submit">Salvar Alterações</button>
-</form>
-
+        <button type="submit">Salvar Alterações</button>
+    </form>
 </body>
 </html>
+

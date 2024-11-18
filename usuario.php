@@ -7,7 +7,6 @@
 
         public function conectar($nome, $host, $usuario, $senha)
         {
-            global $pdo;
 
             try {
                 $this->pdo = new PDO("mysql:dbname=" . $nome, $usuario, $senha);
@@ -72,9 +71,12 @@
 
         public function listarUsuarios()
         {
+            if (!$this->pdo){
+                throw new Exception("Erro: Conexao com o banco de dados falhou");
+            }
             global $pdo;
 
-            $sqlListar = $pdo->prepare("SELECT * FROM usuario");
+            $sqlListar = $this->pdo->prepare("SELECT * FROM usuario");
             $sqlListar->execute();
 
             if($sqlListar->rowCount()>0)

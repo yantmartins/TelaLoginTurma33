@@ -1,8 +1,14 @@
 <?php
-    require_once 'usuario.php';
-    $usuario = new Usuario();
-    $usuario->conectar("cadastrousuarioturma33","localhost","root", ""); // a conexão precisa ser feita 
-    $dados = $usuario->listarUsuarios();
+require_once 'usuario.php';
+$usuario = new Usuario();
+
+$usuario->conectar("cadastrousuarioturma33", "localhost", "root", "");
+
+if (!empty($usuario->msgErro)) {
+    die("Erro ao conectar ao banco de dados: " . $usuario->msgErro);
+}
+
+$dados = $usuario->listarUsuarios();
 ?>
 
 <!DOCTYPE html>
@@ -33,8 +39,8 @@
                     <td><?php echo $pessoa['email'];?></td>
                     <td><?php echo $pessoa['telefone'];?></td>
                     <td>
-                        <a href="editarUsuario.php?id=<?php $pessoa['id_usuario']; ?>">Editar</a>
-                        <a href="excluirUsuario.php?id=<?php $pessoa['id_usuario']; ?>">Excluir</a>
+                    <a href="editarUsuario.php?id=<?php echo $pessoa['id_usuario']; ?>">Editar</a>
+                    <a href="excluirUsuario.php?id=<?php echo $pessoa['id_usuario']; ?>">Excluir</a>
                     </td>
                 </tr>
             
