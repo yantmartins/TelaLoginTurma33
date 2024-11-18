@@ -1,6 +1,7 @@
 <?php
     require_once 'usuario.php';
     $usuario = new Usuario();
+    $usuario->conectar("cadastroturma33", "localhost", "root", "");
     
 ?>
 
@@ -30,67 +31,28 @@
 
     <?php
 
-        if(isset($_POST['nome']))
-        {
-            $nome = $_POST['nome'];
-            $telefone = $_POST['telefone'];
-            $email = $_POST['email'];
-            $senha = $_POST['senha'];
-            $confSenha = addslashes($_POST['confSenha']);
+if (isset($_POST['nome'])) {
+    $nome = $_POST['nome'];
+    $telefone = $_POST['telefone'];
+    $email = $_POST['email'];
+    $senha = $_POST['senha'];
+    $confSenha = $_POST['confSenha'];
 
-            if(!empty($nome) && !empty($email) && !empty($telefone) && !empty($senha) && !empty($confSenha))
-            {
-                $usuario->conectar("cadastrousuarioturma33","localhost","root", "");
-                if($usuario->msgErro == "")
-                {
-                    if($senha == $confSenha)
-                    {
-                        if($usuario->cadastrar($nome, $telefone, $email, $senha))
-                        {
-                            ?>
-                                <!-- bloco de HTML -->
-                                <div class="msg-sucesso">
-                                    <p>Cadastrado com Sucesso.</p>
-                                    <p>Clique <a href="login.php">aqui </a>para logar</p>
-                                </div>
-                            <?php
-                        }
-                        else
-                        {
-                            ?>
-                            <div class="msg-erro">
-                                <p>E-mail já cadastrado.</p>
-                            </div>
-                            <?php
-                        }
-                    }
-                    else
-                    {
-                        ?>
-                            <div class="msg-erro">
-                                <p>As Senhas não conferem.</p>
-                            </div>
-                        <?php
-                    }
-                }
-                else
-                {
-                    ?> 
-                    <div class="msg-erro">
-                        <?php echo "Erro: ".$usuario->msgErro;?>                        
-                    </div>
-                    <?php
-                }
+    if (!empty($nome) && !empty($telefone) && !empty($email) && !empty($senha) && !empty($confSenha)) {
+        if ($senha === $confSenha) {
+            // Verificar se o e-mail já está cadastrado
+            if ($usuario->cadastrar($nome, $telefone, $email, $senha)) {
+                echo "<p>Cadastrado com sucesso! <a href='login.php'>Clique aqui</a> para logar.</p>";
+            } else {
+                echo "<p>E-mail já cadastrado.</p>";
             }
-            else
-            {
-                ?>
-                    <div class="msg-erro">
-                        <p>Preencha todos os campos.</p>
-                    </div>
-                <?php
-            }
+        } else {
+            echo "<p>As senhas não conferem.</p>";
         }
+    } else {
+        echo "<p>Preencha todos os campos.</p>";
+    }
+}
     ?>
 </body>
 </html>

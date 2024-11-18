@@ -4,8 +4,6 @@ $usuario = new Usuario();
 $usuario->conectar("cadastrousuarioturma33", "localhost", "root", "");
 
 
-
-
 if (isset($_GET['id']) && !empty($_GET['id'])) {
     $id = addslashes($_GET['id']);
 
