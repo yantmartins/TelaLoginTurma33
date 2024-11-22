@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 11-Nov-2024 às 21:02
+-- Tempo de geração: 22-Nov-2024 às 18:53
 -- Versão do servidor: 10.4.28-MariaDB
 -- versão do PHP: 8.2.4
 
@@ -40,11 +40,9 @@ CREATE TABLE `usuario` (
 --
 
 INSERT INTO `usuario` (`id_usuario`, `nome`, `email`, `telefone`, `senha`) VALUES
-(1, 'Yan Torres Martins', 'yantmartins@live.com', '67999698168', 'e10adc3949ba59abbe56e057f20f883e'),
-(2, 'Lia Torres', 'liatorrespet@outlook.com', '67993331015', 'e10adc3949ba59abbe56e057f20f883e'),
-(3, 'Paulo Martins', 'trupepaulo@gmail.com', '67999121890', 'b8e4d43f117eab5ef7fdea8d5a2afc42'),
-(4, 'Maira Torres', 'mairatorres@gmail.com', '67998002120', 'e35cf7b66449df565f93c607d5a81d09'),
-(5, 'Joeder Araujo', 'joederaraujo@gmail.com', '67982045054', 'b9b06068a53505062e5d98408583fb9e');
+(12, 'Isabela Oliveira ', 'isaoliveira@gmail.com', '67999665542', '063a66de90b9b8f3c3409f91ce8ac86e'),
+(13, 'Yan Torres Martins', 'yantmartins@live.com', '67999698168', '25d55ad283aa400af464c76d713c07ad'),
+(15, 'Maria da Silva', 'maria123@gmail.com', '67999999988', 'e10adc3949ba59abbe56e057f20f883e');
 
 --
 -- Índices para tabelas despejadas
@@ -64,7 +62,7 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de tabela `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
