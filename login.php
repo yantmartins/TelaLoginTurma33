@@ -1,26 +1,27 @@
 <?php
-    require_once 'usuario.php';
-    $usuario = new Usuario();
+require_once 'usuario.php';
+$usuario = new Usuario();
 ?>
-
 
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Tela Login</title>
+    <title>Login</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h2>TELA LOGIN</h2><br><br>
-    <form  method="post">
-        <label>Usuário:</label><br>
-        <input type="email" name="email" id="" placeholder="Digite seu e-mail"><br><br>
-        <label>Senha:</label><br>
-        <input type="password" name="senha" id="" placeholder="********"><br><br>
+    <h2>Login</h2>
+    <form method="post" class="form-login">
+        <label>Usuário:</label>
+        <input type="email" name="email" placeholder="Digite seu e-mail" required><br>
+        
+        <label>Senha:</label>
+        <input type="password" name="senha" placeholder="********" required><br>
 
-        <input type="submit" value="LOGAR"><br>
-        <a href="cadastro.php">INSCREVA-SE</a>
+        <input type="submit" value="Logar" class="btn editar">
+        <a href="cadastro.php" class="btn">Inscreva-se</a>
     </form>
 
     <?php
@@ -62,12 +63,9 @@
                     <div class="msg-erro">
                         <p>Preencha todos os campos.</p>
                     </div>
-
                 <?php
             }
         }
-
     ?>
-    
 </body>
 </html>
