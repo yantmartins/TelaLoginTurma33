@@ -14,18 +14,18 @@ if (isset($_POST['excluir']) && !empty($_POST['id']))
     $usuario->excluirUsuario($_POST['id']);
 }
 
-//Edita
-if (isset($_POST['editar']) && !empty($_POST['id']) && !empty($_POST['nome']) && !empty($_POST['email']) && !empty($_POST['telefone'])) {
-    $id = $_POST['id'];
-    $nome = $_POST['nome'];
-    $email = $_POST['email'];
-    $telefone = $_POST['telefone'];
-    if ($usuario->editarUsuario($id, $nome, $email, $telefone)) {
-        echo "Usuário editado com sucesso.";
-    } else {
-        echo "Erro ao editar usuário.";
-    }
-}
+// //Edita
+// if (isset($_POST['editar']) && !empty($_POST['id']) && !empty($_POST['nome']) && !empty($_POST['email']) && !empty($_POST['telefone'])) {
+//     $id = $_POST['id'];
+//     $nome = $_POST['nome'];
+//     $email = $_POST['email'];
+//     $telefone = $_POST['telefone'];
+//     if ($usuario->editarUsuario($id, $nome, $email, $telefone)) {
+//         echo "Usuário editado com sucesso.";
+//     } else {
+//         echo "Erro ao editar usuário.";
+//     }
+// }
 
 //Lista
 $dados = $usuario->listarUsuarios();
@@ -57,22 +57,20 @@ $dados = $usuario->listarUsuarios();
                     foreach ($dados as $pessoa): 
             ?>
                 <tr>
-                <form method="post">
-                        <td>
-                            <input type="text" name="nome" value="<?php echo $pessoa['nome']; ?>" required>
-                        </td>
-                        <td>
-                            <input type="email" name="email" value="<?php echo $pessoa['email']; ?>" required>
-                        </td>
-                        <td>
-                            <input type="text" name="telefone" value="<?php echo $pessoa['telefone']; ?>" required>
-                        </td>
-                        <td>
+                 
+                 <td><?php echo $pessoa['nome']; ?></td>
+                    <td><?php echo $pessoa['email']; ?></td>
+                    <td><?php echo $pessoa['telefone']; ?></td>
+                    <td>
+                        <!--Ir para edição -->
+                        <a href="editarUsuario.php?id=<?php echo $pessoa['id_usuario']; ?>" class="btn">Editar</a>
+
+                        <!-- Excluir o usuário -->
+                        <form method="post" style="display:inline;">
                             <input type="hidden" name="id" value="<?php echo $pessoa['id_usuario']; ?>">
-                            <button type="submit" name="editar">Editar</button>
                             <button type="submit" name="excluir" onclick="return confirm('Tem certeza que deseja excluir este usuário?');">Excluir</button>
-                        </td>
-                    </form>
+                        </form>
+                    </td>
                 </tr>    
             <?php
                 endforeach;
