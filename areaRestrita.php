@@ -20,7 +20,11 @@ if (isset($_POST['editar']) && !empty($_POST['id']) && !empty($_POST['nome']) &&
     $nome = $_POST['nome'];
     $email = $_POST['email'];
     $telefone = $_POST['telefone'];
-    $usuario->editarUsuario($id, $nome, $email, $telefone);
+    if ($usuario->editarUsuario($id, $nome, $email, $telefone)) {
+        echo "Usuário editado com sucesso.";
+    } else {
+        echo "Erro ao editar usuário.";
+    }
 }
 
 //Lista
