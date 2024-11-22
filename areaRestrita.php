@@ -14,19 +14,6 @@ if (isset($_POST['excluir']) && !empty($_POST['id']))
     $usuario->excluirUsuario($_POST['id']);
 }
 
-// //Edita
-// if (isset($_POST['editar']) && !empty($_POST['id']) && !empty($_POST['nome']) && !empty($_POST['email']) && !empty($_POST['telefone'])) {
-//     $id = $_POST['id'];
-//     $nome = $_POST['nome'];
-//     $email = $_POST['email'];
-//     $telefone = $_POST['telefone'];
-//     if ($usuario->editarUsuario($id, $nome, $email, $telefone)) {
-//         echo "Usuário editado com sucesso.";
-//     } else {
-//         echo "Erro ao editar usuário.";
-//     }
-// }
-
 //Lista
 $dados = $usuario->listarUsuarios();
 ?>
